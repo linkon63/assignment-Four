@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Booking</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!--Header and Menu Section-->
+    <header class="container">
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a class="active" href="#">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!--Booking Section-->
+    <main class="main-content container" id="main-area">
+        <div class="booking-form">
+            <h3>Booking Flights</h3>
+            <div class="input-group">
+                <label for="">Flying From</label>
+                <input class="inp-style" type="text" name="" placeholder="Dhake, Bangladesh">
+            </div>
+            <div class="input-group">
+                <label for="">Flying To</label>
+                <input class="inp-style" type="text" name="" placeholder="New York, United States">
+            </div>
+            <div class="inputs">
+                <div class="input-group">
+                    <label" for="">Departure</label>
+                        <input class="inp-style" type="date" name="">
+                </div>
+                <div class="input-group">
+                    <label for="">Return</label>
+                    <input class="inp-style" type="date" name="">
+                </div>
+            </div>
+            <!---- Ticket Input form here---->
+            <div class="input-group f-class">
+                <div>
+                    <label for="">First Class Per Ticket:$150 = ($<span id="firstClassCost">0</span>)</label>
+                    <div class="plus-minus-btn d-flex ">
+                        <input id="inputValue" type="text" value="0">
+                        <button id="descrease" class="btn btn-secondary m-1"><i class="fas fa-minus"></i></button>
+                        <button id="increase" class="btn btn-primary m-1"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="input-group f-class">
+                <div>
+                    <label for="">Economy Per Ticket:$100 =($<span id="economy">0</span>)</label>
+                    <div class="plus-minus-btn d-flex">
+                        <input id="inputValue-1" type="text" value="0">
+                        <button id="descrease-1" class="btn btn-secondary m-1 "><i class="fas fa-minus"></i></button>
+                        <button id="increase-1" class="btn btn-primary m-1"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+            <!---- Ticket Input End here---->
+            <!---- Ticket Calculation Start form here---->
+            <div class="calculations">
+                <div class="amount">
+                    <div class="left">
+                        <p>Subtotal</p>
+                    </div>
+                    <div class="right">
+                        <p>$<span id="subTotal">0</span></p>
+                    </div>
+                </div>
+
+                <div class="amount">
+                    <div class="left">
+                        <p>Charge 10% VAT</p>
+                    </div>
+                    <div class="right">
+                        <p>$<span id="vat">0</span></p>
+                    </div>
+                </div>
+                <hr>
+                <div class="amount">
+                    <div class="left">
+                        <h4>Total</h4>
+                    </div>
+                    <div class="right">
+                        <p>$<span id="total">0</span></p>
+                    </div>
+                </div>
+            </div>
+            <!---- Ticket Calculation Start form here---->
+            <button id="bookNow" class="btn-style">Book Now</button>
+        </div>
+
+        <div class="booking-content">
+            <h1>discover <br> around the world</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicingelit. Provident voluptatibus quam fuga laborumalias
+                veniam libero autem quasi maxime ullam vero nama imi dolor, architecto ab facilis eaque deserunt nobise
+                voluptatibus quam</p>
+        </div>
+        </section>
+    </main>
+    <main id="main-area-booknow-page">
+        <div class="jumbotron text-center">
+            <h1 class="display-3">Thank You!</h1>
+            <p class="lead"><strong>Please wait</strong> for your destination you selected to go.</p>
+            <p>Subtotal : $<span id="booking-subtotal">0</span></p>
+            <p>VAT : $<span id="VAT">0</span></p>
+            <p>Total : $<span id="booking-total">0</span></p>
+            <hr>
+            <p>
+                Having trouble? <a href="https://www.linkedin.com/in/abraham-linkon-5988161b8/">Contact us</a>
+            </p>
+            <p class="lead">
+                <a class="btn btn-primary  btn-md" href="index.html" role="button">Home Page</a>
+            </p>
+        </div>
+    </main>
+
+    <!--Thank You-->
+
+    <script>
+        //Calling Function btnEventHandler This Function has 5 parameters 
+
+        //FirstClass Booking Input Value and Increase and Descrease Btn and Cost Will Work From Here
+        btnEventHandler('increase', true, 'inputValue', 'firstClassCost', 150);
+        btnEventHandler('descrease', false, 'inputValue', "firstClassCost", 150);
+
+        //Economy Input Value and Increase and Descrease Btn and Cost Will Work From Here
+        btnEventHandler('increase-1', true, 'inputValue-1', 'economy', 100);
+        btnEventHandler('descrease-1', false, 'inputValue-1', 'economy', 100);
+
+        //Function Will take the input parameters and increase subTotal and Total Value per Click
+        function btnEventHandler(btnID, isIncrease, inputValueID, costID, perTicketCost) {
+            document.getElementById(btnID).addEventListener('click', function () {
+                const inputValue = document.getElementById(inputValueID);
+                const inputValueParse = parseInt(inputValue.value);
+                let inputNewValue = inputValueParse;
+                if (isIncrease == true) {
+                    inputNewValue = inputValueParse + 1;
+                }
+                if (isIncrease == false && inputNewValue > 0) {
+                    inputNewValue = inputValueParse - 1;
+                }
+                inputValue.value = inputNewValue;
+                let inputValueTotalCost = inputNewValue * perTicketCost;
+                document.getElementById(costID).innerText = inputValueTotalCost;
+                //All the input btn value will calculate from calculate total function
+                calculationTotalCost('subTotal', 'vat', 'total');
+            })
+        }
+        //Book Now Btn Event Work From here :)
+        document.getElementById('bookNow').addEventListener('click', function () {
+            document.getElementById('main-area').style.display = "none";
+            document.getElementById('main-area-booknow-page').style.display = "block"
+            calculationTotalCost('booking-subtotal', 'VAT', 'booking-total');
+
+        })
+
+        //Calculating Total from here
+        function calculationTotalCost(SubtotalIDname, vatIDname, totalIDname) {
+            const firstClassParse = inputInnerTextandPerseInt('firstClassCost');
+            const economyParse = inputInnerTextandPerseInt('economy');
+            const totalSub = firstClassParse + economyParse;
+            document.getElementById(SubtotalIDname).innerText = totalSub; // Subtotal of total ticket Booking 
+            //Including VAT with SubTotal working from here
+            const vatTotal = totalSub * 0.1;
+            document.getElementById(vatIDname).innerText = vatTotal;
+            //Total Sum of SUbtotal and VAT Workng form here 
+            const totalVATSubTotal = vatTotal + totalSub;
+            document.getElementById(totalIDname).innerText = totalVATSubTotal;
+            console.log(totalVATSubTotal);
+        }
+
+        //Get Inner Text and Convert in Integer by this Function
+        function inputInnerTextandPerseInt(ID) {
+            const idInnerText = document.getElementById(ID).innerText;
+            const idInnerTextPerse = parseInt(idInnerText);
+            return idInnerTextPerse;
+        }
+    </script>
+</body>
+
+</html>
